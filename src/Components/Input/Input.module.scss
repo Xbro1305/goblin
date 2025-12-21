@@ -1,0 +1,54 @@
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+
+  p {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    color: var(--gray-5);
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 160%;
+    letter-spacing: 0%;
+    transition: all 0.5s ease;
+  }
+
+  input {
+    height: 85px;
+    border-radius: 8px;
+    background: #eaeaea;
+    border: none;
+    padding: 20px;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 160%;
+    letter-spacing: 0%;
+  }
+
+  input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-1);
+  }
+
+  input:focus + p > p {
+    left: 10px;
+    font-size: 14px !important;
+    transform: translateY(-30px);
+  }
+
+  input:valid + p > p {
+    left: 10px;
+    font-size: 14px !important;
+    transform: translateY(-30px);
+  }
+}

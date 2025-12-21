@@ -1,0 +1,129 @@
+.myOrders {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px var(--sides-padding);
+
+  &_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    a {
+      font-size: 28px;
+      margin-right: 20px;
+      color: #567e5f;
+    }
+  }
+
+  &_content {
+    padding: 20px;
+    background: #eee;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &_main {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    &_top {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &_section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        p {
+          cursor: pointer;
+        }
+      }
+
+      &_sort {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        div {
+          padding: 5px 10px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border-radius: 10px;
+          background: #fff;
+
+          > :nth-child(2) {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+
+    &_item {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 10px;
+      background: #fff;
+      border-radius: 10px;
+      gap: 20px;
+
+      &_top {
+        display: flex;
+        align-items: center;
+        padding-bottom: 25px;
+        justify-content: space-between;
+        border-bottom: 1px solid #c0c0c0;
+        margin-bottom: 45px;
+
+        &_section {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          p {
+            font-weight: 600 !important;
+          }
+
+          button {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+          }
+        }
+
+        div {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          p {
+            text-align: right;
+          }
+        }
+      }
+
+      &_section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

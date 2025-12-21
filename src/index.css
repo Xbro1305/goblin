@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overscroll-behavior: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --text-dark: #2e363e;
+  --sides-padding: 50px;
+  --red-gradient: linear-gradient(90deg, #752401 0%, #df4806 99.26%);
+  --green-gradient: linear-gradient(90deg, #1b9027 0%, #bad52d 100%);
+  --button-shadow: 0px 4px 8px 0px #e8e7df;
+  --gray-5: #7e868e;
+  --bg-color: #f2f2f2;
+  --green: #215e04;
+}
+
+/* ::-webkit-scrollbar {
+  background: #f2f2f2;
+  border-radius: 60px;
+  padding: 10px;
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1b9027 0%, #bad52d 100%);
+  border-radius: 60px;
+  width: 8px !important;
+  height: 8px;
+} */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Фон полосы прокрутки */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+  margin: 5px 0; /* Отступы сверху и снизу */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1b9027 0%, #bad52d 100%);
+  border-radius: 60px;
+  width: 8px !important;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #5ea132, #a0d06e);
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+.header-30 {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 133%;
+  letter-spacing: 0%;
+  color: var(--text-dark);
+}
+
+.text-16 {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: var(--text-dark);
+}
+
+.green-button {
+  background: var(--green-gradient);
+  border-radius: 8px;
+  box-shadow: var(--button-shadow);
+  padding: 10px 20px;
+  height: 85px;
+  color: white;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  border: none;
+}
+
+.red-button {
+  background: var(--red-gradient);
+  border-radius: 8px;
+  box-shadow: var(--button-shadow);
+  padding: 10px 20px;
+  height: 85px;
+  color: white;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  border: none;
+}
+
+.link {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: var(--gray-5);
+  text-decoration: none;
+}
+
+.h1 {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.title {
+  color: #2a2e2b;
+}
+
+.background {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.span {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.span2 {
+  font-size: 12px;
+  font-weight: 400;
+}

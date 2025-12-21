@@ -1,0 +1,65 @@
+.createOrder {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px var(--sides-padding);
+
+  &_top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding-bottom: 20px;
+    border-bottom: 1px solid #9d9d9d;
+  }
+
+  &_body {
+    display: flex;
+    width: 100%;
+    gap: 100px;
+    padding: 20px 0;
+  }
+
+  &_left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    width: 100%;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
+
+      input,
+      select {
+        padding: 5px 10px;
+        border: 1px solid #9d9d9d;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 500px;
+      }
+    }
+  }
+
+  &_payment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: #9d9d9d solid 1px;
+
+    svg {
+      font-size: 20px;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+}
