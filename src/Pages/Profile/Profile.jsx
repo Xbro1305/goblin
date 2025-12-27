@@ -106,7 +106,9 @@ const Info = () => {
 
   useEffect(() => {
     api
-      .get(`/api/auth/me`)
+      .get(`/api/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         setUser(response.data);
       })
@@ -130,7 +132,8 @@ const Info = () => {
     <div className={styles?.profile_info}>
       <div>
         <h2 className={styles.profile_info_name}>
-          Геннадий Орлов Александрович
+          {/* Геннадий Орлов Александрович */}
+          {user?.fullName || "Имя не указано"}
         </h2>
         <p className={styles.profile_info_verification}>
           <BiCheckCircle style={{ fontSize: "22px" }} /> Верифицирован

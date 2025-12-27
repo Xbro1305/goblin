@@ -10,6 +10,7 @@ import { Orders } from "./Pages/P2P/Orders/Orders";
 import { Me } from "./Pages/Me/Me";
 import { CreateOrder } from "./Pages/P2P/CreateOrder/CreateOrder";
 import { Deal } from "./Pages/P2P/Deal/Deal";
+import { Home } from "./Pages/Home/Home";
 
 export const Router = () => {
   return (
@@ -17,6 +18,7 @@ export const Router = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signin" element={<Signin />} />
       <Route element={<AuthGuard />}>
+        <Route path="/" element={<Home />} />
         <Route path="/me" element={<Profile />} />
         <Route path="/order/:id" element={<Order />} />
         <Route path="/deal/:id" element={<Deal />} />

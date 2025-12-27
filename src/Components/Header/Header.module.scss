@@ -22,6 +22,10 @@
       font-size: 20px;
       font-family: Montserrat;
     }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   &_contacts {
@@ -82,5 +86,13 @@
         background: #1291d9;
       }
     }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 20px;
   }
 }
