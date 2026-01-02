@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://91.214.78.53:3000", // The address of the NestJS backend
+  baseURL: "https://goblin.sharifov.pro", // The address of the NestJS backend
 });
 
 api.interceptors.request.use((config) => {
