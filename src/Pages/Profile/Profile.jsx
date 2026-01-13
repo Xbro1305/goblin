@@ -17,7 +17,7 @@ import { NumericFormat } from "react-number-format";
 import { GoArrowDownLeft, GoArrowUpRight } from "react-icons/go";
 import { Loader } from "../../Components/Loader/Loader";
 import api from "../../api";
-import { BsCash, BsClock, BsCoin } from "react-icons/bs";
+import { BsClock, BsCoin } from "react-icons/bs";
 import { LuTrash2 } from "react-icons/lu";
 import { TbEdit } from "react-icons/tb";
 import QRCode from "react-qr-code";
@@ -709,37 +709,77 @@ const Action = ({ currency }) => {
 
 const PaymentMethods = () => {
   const [openedModal, setOpenedModal] = React.useState(null);
+  const [methods, setMethods] = useState([]);
 
-  const methods = [
+  const refresh = api
+    .get(`/payments`)
+    .then((response) => {
+      setMethods(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => setLoading(false));
+
+  useEffect(() => refresh(), []);
+
+  const paymentMethods = [
     {
       name: "Тинькофф",
-      type: "bank",
-      number: "4040 4004 4004 4494",
-      holder: "СВЕТЛАНА ОЛЕГОВНА БУМ",
+      type: "card",
+      brand: "Tinkoff",
       logo: <img src={TinkoffLogo} alt="Tinkoff Logo" />,
     },
     {
       name: "Сбербанк",
-      type: "bank",
-      number: "4040 4004 4004 4494",
-      holder: "СВЕТЛАНА ОЛЕГОВНА БУМ",
+      brand: "SberBank",
+      type: "card",
       logo: <img src={SberLogo} alt="Sberbank Logo" />,
     },
     {
       name: "Онлайн перевод",
       type: "online",
-      number: "4040 4004 4004 4494",
-      holder: "СВЕТЛАНА ОЛЕГОВНА БУМ",
       logo: <img src={CardLogo} alt="Card Logo" />,
     },
     {
       name: "Наличные",
       type: "cash",
-      number: "4040 4004 4004 4494",
-      holder: "СВЕТЛАНА ОЛЕГОВНА БУМ",
       logo: <img src={Cashlogo} alt="Cash Logo" />,
     },
   ];
+
+  const handleSubmit = () => {
+    if (!openedModal.type) return;
+
+    const data = openedModal;
+
+    if (data.editing) {
+      const { editing, ...rest } = data;
+      api
+        .patch("/payments/" + data.id, rest)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    } else
+      api
+        .post("/payments", data)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+    setOpenedModal(null);
+    refresh();
+  };
+
+  const handleDelete = (id) => {
+    const confirm = window.confirm(
+      "Вы уверены, что хотите удалить метод оплаты?"
+    );
+    if (!confirm) return;
+
+    api
+      .delete("/payments/" + id)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className={styles.profile_payments}>
@@ -748,18 +788,29 @@ const PaymentMethods = () => {
         {methods.map((method, index) => (
           <div key={index} className={styles.profile_payments_item}>
             <div className={styles.profile_payments_item_logo}>
-              {method.logo}
-              {method.name}
+              {
+                paymentMethods?.find(
+                  (p) => p?.name == method?.details?.brandName
+                )?.logo
+              }
+              {method?.details?.brandName}
             </div>
             <div className={styles.profile_payments_item_info}>
-              <p>{method.number}</p>
-              <p>{method.holder}</p>
+              <p>{method?.details?.cardNumber}</p>
+              <p>{method?.label}</p>
             </div>
             <div className={styles.profile_payments_item_action}>
-              <button className="link">
+              <button
+                className="link"
+                onClick={() => setOpenedModal({ ...method, editing: true })}
+              >
                 <TbEdit />
               </button>
-              <button className="link" style={{ color: "#ED5E3F" }}>
+              <button
+                className="link"
+                style={{ color: "#ED5E3F" }}
+                onClick={() => handleDelete(method.id)}
+              >
                 <LuTrash2 />
               </button>
             </div>
@@ -779,11 +830,19 @@ const PaymentMethods = () => {
             <p style={{ marginBottom: "20px" }}>
               Время, которое потребуется для автообновления страницы
             </p>
-            {methods.map((method, index) => (
+            {paymentMethods.map((method, index) => (
               <div
                 key={index}
                 className={styles.profile_payments_modal_item}
-                onClick={() => setOpenedModal("details")}
+                onClick={() =>
+                  setOpenedModal({
+                    type: method.type,
+                    details: {
+                      brand: method.brand,
+                      brandName: method.name,
+                    },
+                  })
+                }
               >
                 <p>
                   {method.logo}
@@ -805,7 +864,7 @@ const PaymentMethods = () => {
         </div>
       )}
 
-      {openedModal == "details" && (
+      {openedModal?.type && (
         <div className={styles.modal}>
           <div className={styles.modal_content}>
             <h1>Добавить способ оплаты</h1>
@@ -815,6 +874,10 @@ const PaymentMethods = () => {
 
             <Input
               type="text"
+              onChange={(value) =>
+                setOpenedModal((prev) => ({ ...prev, label: value }))
+              }
+              value={openedModal.label}
               placeholder={
                 <p
                   style={{ display: "flex", alignItems: "center", gap: "5px" }}
@@ -825,6 +888,16 @@ const PaymentMethods = () => {
             />
             <Input
               type="text"
+              value={openedModal?.details?.cardNumber}
+              onChange={(value) =>
+                setOpenedModal((prev) => ({
+                  ...prev,
+                  details: {
+                    ...prev.details,
+                    cardNumber: value,
+                  },
+                }))
+              }
               placeholder={
                 <p
                   style={{ display: "flex", alignItems: "center", gap: "5px" }}
@@ -834,7 +907,11 @@ const PaymentMethods = () => {
               }
             />
 
-            <button className="green-button" style={{ marginTop: "20px" }}>
+            <button
+              className="green-button"
+              style={{ marginTop: "20px" }}
+              onClick={handleSubmit}
+            >
               Добавить
             </button>
             <button
